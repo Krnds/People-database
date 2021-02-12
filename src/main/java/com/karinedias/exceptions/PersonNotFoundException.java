@@ -7,4 +7,8 @@ public class PersonNotFoundException extends IllegalArgumentException {
 	public PersonNotFoundException(String errorMessage, Throwable err) {
 		super(errorMessage, err);
 	}
+
+	public PersonNotFoundException(String message) {
+		super(message);
+	}
 }
