@@ -2,7 +2,6 @@ package com.karinedias.service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,28 +17,11 @@ public class PersonService {
 		if (!isLegal(person)) {
 			return Optional.empty();
 		}
-		Person createdPerson = dao.addPerson(person);
-		return Optional.of(createdPerson);
+		return dao.addPerson(person);
 	}
 
 	private boolean isLegal(Person person) {
 		return ChronoUnit.YEARS.between(person.getBirthdate(), LocalDate.now()) >= 18;
-	}
-	
-	
-	private boolean isInDatabase(Person person) {
-		
-		boolean personExists = false;
-
-		for (Person per : dao.getAllPersons()) {
-			if (person.equals(per)) {
-				personExists = true;
-			}
-		}
-		return personExists;
-				
-				
-				
 	}
 
 	public void deletePerson(int id) {
@@ -50,16 +32,17 @@ public class PersonService {
 
 	public Optional<Person> updatePerson(Person newPerson) {
 
-		Person updatedPerson = dao.updatePerson(newPerson);
-		if (!isLegal(updatedPerson)) {
+		Optional<Person> updatedPerson = dao.updatePerson(newPerson);
+		if (!isLegal(updatedPerson.get())) {
 			return Optional.empty();
 		}
-		return Optional.of(updatedPerson);
+		return updatedPerson;
+
 	}
 
 	public Optional<Person> getPerson(int id) {
+		return dao.getPerson(id);
 
-		return Optional.of(dao.getPerson(id)); // or Optional.ofNullable ?
 	}
 
 	public List<Person> getAllPersons() {
