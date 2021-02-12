@@ -3,7 +3,9 @@ package com.karinedias.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
+import com.karinedias.exceptions.PersonNotFoundException;
 import com.karinedias.model.Person;
 
 public class MemoryDao implements Dao {
@@ -12,37 +14,40 @@ public class MemoryDao implements Dao {
 	private static int sequence = 1;
 
 	@Override
-	public Person addPerson(Person per) {
+	public Optional<Person> addPerson(Person person) {
 		int id = sequence++;
-		per.setId(id);
-		DB.put(id, per);
-		
-		return per;
+		person.setId(id);
+		DB.put(id, person);
+
+		return Optional.of(person);
 	}
 
 	@Override
 	public void deletePerson(int id) {
-		DB.remove(id); 
+		DB.remove(id);
 	}
 
 	@Override
-	public Person updatePerson(Person newPerson) {
-		int id = newPerson.getId();
-		Person oldPerson = DB.get(id);
-		DB.replace(id, oldPerson, newPerson);
-		return newPerson;
+	public Optional<Person> updatePerson(Person newPerson) {
+		if (DB.replace(newPerson.getId(), newPerson) == null) {
+			throw new PersonNotFoundException(String.format("The person with ID %s doesn't exists", newPerson.getId()));
+		}
+		return Optional.of(newPerson);
 	}
 
 	@Override
-	public Person getPerson(int id) {
-		return DB.get(id);
-
+	public Optional<Person> getPerson(int id) {
+		Person personToGet = DB.get(id);
+		if (personToGet == null) {
+			throw new PersonNotFoundException(String.format("The person with ID %s doesn't exists", id));
+		} else {
+			return Optional.of(personToGet);
+		}
 	}
 
 	@Override
 	public List<Person> getAllPersons() {
-		List<Person> persons = new ArrayList<Person>(DB.values());
-		return persons;
+		return new ArrayList<Person>(DB.values());
 	}
 
 }

@@ -1,18 +1,19 @@
 package com.karinedias.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.karinedias.model.Person;
 
 public interface Dao {
 
-	Person addPerson(Person per);
+	Optional<Person> addPerson(Person per);
 
 	void deletePerson(int id);
 
-	Person updatePerson(Person newPerson);
+	Optional<Person> updatePerson(Person newPerson);
 
-	Person getPerson(int id);
+	Optional<Person> getPerson(int id);
 
 	List<Person> getAllPersons();
 
