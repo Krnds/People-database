@@ -38,8 +38,8 @@ public class CommandLineInterface {
 				break;
 			case 5:
 				System.out.println("Retrieving all users...\n");
+				System.out.println("Counting " + PERSONSERVICE.getAllPersons().size() + " persons :");
 				PERSONSERVICE.getAllPersons().forEach(p -> System.out.println(p.toString()));
-				System.out.println("Counting " + PERSONSERVICE.getAllPersons().size() + " persons");
 				break;
 
 			}
@@ -52,7 +52,7 @@ public class CommandLineInterface {
 	public static int mainMenu() {
 		int choice = 0;
 		do {
-			System.out.println("Welcome to the database system !\n-----------------------------");
+			System.out.println("\nWelcome to the database system !\n-----------------------------");
 			System.out.println("Please select a menu option :\n");
 			System.out.println(
 					"[1] Add user to database\n[2] Delete user in database\n[3] Update user in database\n[4] Retrieve user in database\n[5] Retrive ALL users in database\n[6] Quit app");
@@ -116,7 +116,7 @@ public class CommandLineInterface {
 			String city = SCANNER.nextLine();
 			System.out.println("\n[Phone number] :");
 			String phone = SCANNER.nextLine();
-			return new Person(id, firstname, lastname, oldPerson.orElse(null).getBirthdate(), adress, postalCode, city,
+			return new Person(id, firstname, lastname, oldPerson.get().getBirthdate(), adress, postalCode, city,
 					phone);
 		} else {
 			throw new PersonNotFoundException("Person not found", null);
