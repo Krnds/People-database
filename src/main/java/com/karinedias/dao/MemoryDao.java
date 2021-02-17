@@ -18,7 +18,6 @@ public class MemoryDao implements Dao {
 		int id = sequence++;
 		person.setId(id);
 		DB.put(id, person);
-
 		return Optional.of(person);
 	}
 

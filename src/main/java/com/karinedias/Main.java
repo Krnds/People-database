@@ -1,6 +1,8 @@
 package com.karinedias;
 
 import java.time.LocalDate;
+
+import com.karinedias.dao.MemoryDao;
 import com.karinedias.model.Person;
 import com.karinedias.presentation.CommandLineInterface;
 import com.karinedias.service.PersonService;
@@ -10,7 +12,8 @@ public class Main {
 	public static void main(String[] args) {
 
 		// Put some people into database
-		PersonService personService = new PersonService();
+		MemoryDao memoryDao = new MemoryDao();
+		PersonService personService = new PersonService(memoryDao);
 		personService.create(new Person(1, "Florence", "Cornebuse", LocalDate.of(1963, 12, 03), "21 rue Parchemin",
 				"64100", "Bolquère", "+336745282368"));
 		personService.create(new Person(2, "David", "Petuski", LocalDate.of(1983, 06, 12),

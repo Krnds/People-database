@@ -6,12 +6,15 @@ import java.util.List;
 import java.util.Optional;
 
 import com.karinedias.dao.Dao;
-import com.karinedias.dao.MemoryDao;
 import com.karinedias.model.Person;
 
 public class PersonService {
 
-	private Dao dao = new MemoryDao();
+	private final Dao dao;
+
+	public PersonService(Dao dao) {
+		this.dao = dao;
+	}
 
 	public Optional<Person> create(Person person) {
 		if (!isLegal(person)) {
@@ -25,18 +28,11 @@ public class PersonService {
 	}
 
 	public void deletePerson(int id) {
-
 		dao.deletePerson(id);
-
 	}
 
 	public Optional<Person> updatePerson(Person newPerson) {
-
-		Optional<Person> updatedPerson = dao.updatePerson(newPerson);
-		if (!isLegal(updatedPerson.get())) {
-			return Optional.empty();
-		}
-		return updatedPerson;
+		return dao.updatePerson(newPerson);
 
 	}
 

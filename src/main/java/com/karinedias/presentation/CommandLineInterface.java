@@ -5,6 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Optional;
 import java.util.Scanner;
 
+import com.karinedias.dao.MemoryDao;
 import com.karinedias.exceptions.PersonNotFoundException;
 import com.karinedias.model.Person;
 import com.karinedias.service.PersonService;
@@ -12,7 +13,8 @@ import com.karinedias.service.PersonService;
 public class CommandLineInterface {
 
 	private static final Scanner SCANNER = new Scanner(System.in);
-	private static final PersonService PERSONSERVICE = new PersonService();
+	private static final MemoryDao DAO = new MemoryDao();
+	private static final PersonService PERSONSERVICE = new PersonService(DAO);
 
 	public static void main(String[] args) {
 		int choice;
@@ -34,7 +36,7 @@ public class CommandLineInterface {
 			case 4:
 				System.out.println("Type in ID of the person :\n");
 				int id2 = SCANNER.nextInt();
-				PERSONSERVICE.getPerson(id2).ifPresent(System.out::println);;
+				PERSONSERVICE.getPerson(id2).ifPresent(System.out::println);
 				break;
 			case 5:
 				System.out.println("Retrieving all users...\n");
@@ -116,8 +118,7 @@ public class CommandLineInterface {
 			String city = SCANNER.nextLine();
 			System.out.println("\n[Phone number] :");
 			String phone = SCANNER.nextLine();
-			return new Person(id, firstname, lastname, oldPerson.get().getBirthdate(), adress, postalCode, city,
-					phone);
+			return new Person(id, firstname, lastname, oldPerson.get().getBirthdate(), adress, postalCode, city, phone);
 		} else {
 			throw new PersonNotFoundException("Person not found", null);
 
