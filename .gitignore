@@ -16,6 +16,9 @@ local.properties
 .loadpath
 .recommenders
 
+# Dbeaver client for databases 
+.dbeaver
+
 # External tool builders
 .externalToolBuilders/
 
