@@ -10,11 +10,14 @@ import java.sql.SQLWarning;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import org.postgresql.util.PSQLException;
 
 import com.karinedias.exceptions.PersonNotFoundException;
 import com.karinedias.model.Person;
 
-public class DaoJDBC {
+public class DaoJDBC implements Dao {
 
 	private static final String driver = "org.postgresql.Driver";
 	private static final String url = "jdbc:postgresql://localhost:5432/people_database";
@@ -53,7 +56,7 @@ public class DaoJDBC {
 
 	}
 
-	public Person addPerson(Person person) {
+	public Optional<Person> addPerson(Person person) {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -61,7 +64,8 @@ public class DaoJDBC {
 			connection = this.getConnection();
 			String sql = "insert into person(id, firstname, lastname, birthdate, adress, postalcode, city, phonenumber) values (?, ?, ?, ?, ?, ?, ?, ?)";
 			ps = connection.prepareStatement(sql);
-			ps.setInt(1, person.getId());
+			int id = getNextIdAvailable() + 1;
+			ps.setInt(1, id);
 			ps.setString(2, person.getFirstname());
 			ps.setString(3, person.getLastname());
 			ps.setDate(4, Date.valueOf(person.getBirthdate()));
@@ -76,7 +80,7 @@ public class DaoJDBC {
 
 			this.closeConnection(connection, ps, rs);
 		}
-		return person;
+		return Optional.of(person);
 	}
 
 	public void deletePerson(int id) {
@@ -98,7 +102,7 @@ public class DaoJDBC {
 		}
 	}
 
-	public Person updatePerson(Person newPerson) {
+	public Optional<Person> updatePerson(Person newPerson) {
 		Connection cnx = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -124,10 +128,10 @@ public class DaoJDBC {
 		} finally {
 			this.closeConnection(cnx, ps, rs);
 		}
-		return newPerson;
+		return Optional.of(newPerson);
 	}
 
-	public Person getPerson(int personId) {
+	public Optional<Person> getPerson(int personId) {
 		Connection cnx = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -154,7 +158,7 @@ public class DaoJDBC {
 		} finally {
 			this.closeConnection(cnx, pstmt, rs);
 		}
-		return person;
+		return Optional.of(person);
 	}
 
 	public List<Person> getAllPersons() {
@@ -178,5 +182,29 @@ public class DaoJDBC {
 			this.closeConnection(cnx, pstmt, rs);
 		}
 		return persons;
+	}
+
+	private int getNextIdAvailable() { //TODO: delete
+		int id = 0;
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			cnx = this.getConnection();
+			String sql = "select id from person order by id desc";
+			pstmt = cnx.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				id = rs.getInt("id");
+				break;
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.closeConnection(cnx, pstmt, rs);
+		}
+
+		return id;
 	}
 }
