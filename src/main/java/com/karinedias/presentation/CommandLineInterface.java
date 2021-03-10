@@ -5,6 +5,8 @@ import java.time.format.DateTimeParseException;
 import java.util.Optional;
 import java.util.Scanner;
 
+import com.karinedias.dao.Dao;
+import com.karinedias.dao.DaoJDBC;
 import com.karinedias.dao.MemoryDao;
 import com.karinedias.exceptions.PersonNotFoundException;
 import com.karinedias.model.Person;
@@ -13,35 +15,43 @@ import com.karinedias.service.PersonService;
 public class CommandLineInterface {
 
 	private static final Scanner SCANNER = new Scanner(System.in);
-	private static final MemoryDao DAO = new MemoryDao();
-	private static final PersonService PERSONSERVICE = new PersonService(DAO);
+	private static Dao dao;
+	private static PersonService personService;
 
 	public static void main(String[] args) {
 		int choice;
+		int strategy = chooseStrategy();
+		if (strategy == 1) {
+			dao = new MemoryDao();
+
+		} else if (strategy == 2) {
+			dao = new DaoJDBC();
+		}
+		personService = new PersonService(dao);
 
 		do {
 			choice = mainMenu();
 			switch (choice) {
 			case 1:
-				PERSONSERVICE.create(createUser()).ifPresent(System.out::println);
+				personService.create(createUser()).ifPresent(System.out::println);
 				break;
 			case 2:
 				System.out.println("Type in ID of the person to be deleted :\n");
 				int id = SCANNER.nextInt();
-				PERSONSERVICE.deletePerson(id);
+				personService.deletePerson(id);
 				break;
 			case 3:
-				PERSONSERVICE.updatePerson(updateUser()).ifPresent(System.out::println);
+				personService.updatePerson(updateUser()).ifPresent(System.out::println);
 				break;
 			case 4:
 				System.out.println("Type in ID of the person :\n");
 				int id2 = SCANNER.nextInt();
-				PERSONSERVICE.getPerson(id2).ifPresent(System.out::println);
+				personService.getPerson(id2).ifPresent(System.out::println);
 				break;
 			case 5:
 				System.out.println("Retrieving all users...\n");
-				System.out.println("Counting " + PERSONSERVICE.getAllPersons().size() + " persons :");
-				PERSONSERVICE.getAllPersons().forEach(p -> System.out.println(p.toString()));
+				System.out.println("Counting " + personService.getAllPersons().size() + " persons :");
+				personService.getAllPersons().forEach(p -> System.out.println(p.toString()));
 				break;
 
 			}
@@ -49,6 +59,24 @@ public class CommandLineInterface {
 
 		System.out.println("\n---------Quiting app !---------");
 		System.exit(0);
+	}
+
+	private static int chooseStrategy() {
+		int strategy = 0;
+		do {
+			System.out.println("Choose between :\n[1] Local database \n[2] JDBC :");
+			strategy = SCANNER.nextInt();
+			if (strategy == 1) {
+				dao = (Dao) new MemoryDao();
+			} else if (strategy == 2) {
+				dao = (Dao) new DaoJDBC();
+			} else {
+				System.out.println("Wrong choice. Please type in again.\n");
+			}
+		} while (!(strategy == 1 || strategy == 2));
+
+		return strategy;
+
 	}
 
 	public static int mainMenu() {
@@ -102,7 +130,7 @@ public class CommandLineInterface {
 	public static Person updateUser() {
 		System.out.println("Type in the ID of the person to update :\n");
 		int id = SCANNER.nextInt();
-		Optional<Person> oldPerson = PERSONSERVICE.getPerson(id);
+		Optional<Person> oldPerson = personService.getPerson(id);
 
 		if (oldPerson.isPresent()) {
 			System.out.println("Type in new firstname :\n");
