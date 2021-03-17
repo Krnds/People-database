@@ -19,6 +19,9 @@ local.properties
 # Dbeaver client for databases 
 .dbeaver
 
+# H2 embedded mode persisted data
+.mv.db
+
 # External tool builders
 .externalToolBuilders/
 
