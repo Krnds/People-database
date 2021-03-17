@@ -1,4 +1,8 @@
-DROP TRIGGER IF EXISTS check_birthdate on person;
+--create table person.person (like public.person including all);
+--
+--insert into person.person
+--select * 
+--from public.person;
 
 CREATE TABLE if not exists person (
     id SERIAL PRIMARY KEY,
