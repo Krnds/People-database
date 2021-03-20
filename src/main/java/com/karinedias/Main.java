@@ -1,6 +1,8 @@
 package com.karinedias;
 
 import java.time.LocalDate;
+
+import com.karinedias.dao.DatabaseType;
 import com.karinedias.dao.MemoryDao;
 import com.karinedias.model.Person;
 import com.karinedias.presentation.CommandLineInterface;
@@ -19,7 +21,7 @@ public class Main {
 				"15 avenue du Général de Gaulle", "78490", "Grosrouvre", "0132537712"));
 		personService.create(new Person(3, "Pernille", "Ludron", LocalDate.of(1999, 05, 29),
 				"114 boulevard de la République", "77100", "Provins", "0144296384"));
-		personService.create(new Person(4, "Margot", "La Rue", LocalDate.of(2007, 12, 03), "5 bis rue Leduc", "31400",
+		personService.create(new Person(4, "Margot", "La Rue", LocalDate.of(2000, 12, 03), "5 bis rue Leduc", "31400",
 				"Montpellier", "0617662127"));
 		personService.create(new Person(5, "Jean-Luc", "Davant", LocalDate.of(1953, 01, 31), "81 rue des Petits Champs",
 				"44580", "Les Moutiers-en-Retz", "0274638755"));
