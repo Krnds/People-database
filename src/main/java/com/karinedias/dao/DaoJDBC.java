@@ -6,23 +6,34 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLWarning;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import org.postgresql.util.PSQLException;
 
 import com.karinedias.exceptions.PersonNotFoundException;
 import com.karinedias.model.Person;
 
 public class DaoJDBC implements Dao {
 
-	private static final String driver = "org.postgresql.Driver";
-	private static final String url = "jdbc:postgresql://localhost:5432/people_database";
 	private static final String user = "karine";
 	private static final String password = "karine";
+
+	private static String driver;
+	private static String url;
+
+	public DaoJDBC(DatabaseType database) {
+
+		switch (database) {
+		case POSTGRESQL:
+			driver = database.getDriver();
+			url = database.getURL();
+			break;
+
+		case H2:
+			driver = database.getDriver();
+			url = database.getURL();
+		}
+	}
 
 	public Connection getConnection() throws ClassNotFoundException, SQLException {
 		Connection connection = null;
@@ -80,6 +91,7 @@ public class DaoJDBC implements Dao {
 
 			this.closeConnection(connection, ps, rs);
 		}
+		person.setId(getNextIdAvailable());
 		return Optional.of(person);
 	}
 
@@ -184,7 +196,7 @@ public class DaoJDBC implements Dao {
 		return persons;
 	}
 
-	private int getNextIdAvailable() { //TODO: delete
+	private int getNextIdAvailable() {
 		int id = 0;
 		Connection cnx = null;
 		PreparedStatement pstmt = null;
