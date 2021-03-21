@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import com.karinedias.dao.Dao;
 import com.karinedias.dao.DaoJDBC;
+import com.karinedias.dao.DatabaseType;
 import com.karinedias.dao.MemoryDao;
 import com.karinedias.exceptions.PersonNotFoundException;
 import com.karinedias.model.Person;
@@ -25,7 +26,7 @@ public class CommandLineInterface {
 			dao = new MemoryDao();
 
 		} else if (strategy == 2) {
-			dao = new DaoJDBC();
+			dao = new DaoJDBC(DatabaseType.POSTGRESQL);
 		}
 		personService = new PersonService(dao);
 
@@ -69,7 +70,7 @@ public class CommandLineInterface {
 			if (strategy == 1) {
 				dao = (Dao) new MemoryDao();
 			} else if (strategy == 2) {
-				dao = (Dao) new DaoJDBC();
+				dao = (Dao) new DaoJDBC(DatabaseType.POSTGRESQL);
 			} else {
 				System.out.println("Wrong choice. Please type in again.\n");
 			}
