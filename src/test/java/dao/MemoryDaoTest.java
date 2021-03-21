@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.karinedias.dao.MemoryDao;
@@ -25,12 +26,13 @@ class MemoryDaoTest {
 
 	@Test
 	void addPerson_shouldReturnExpectedPerson() {
-		memoryDao.addPerson(personToTest);
-		assertTrue(Optional.of(personToTest).isPresent());
+		Optional<Person> result = memoryDao.addPerson(personToTest);
+		assertTrue(result.isPresent());
 	}
 
 	@Test
 	void getDeletedPerson_shouldThrowPersonNotFoundException() {
+		memoryDao.addPerson(personToTest);
 		int id = personToTest.getId();
 		memoryDao.deletePerson(id);
 		Exception exception = assertThrows(PersonNotFoundException.class, () -> {
@@ -45,11 +47,10 @@ class MemoryDaoTest {
 	@Test
 	void updatePerson_shouldReturnUpdatedPerson() {
 		memoryDao.addPerson(personToTest);
-		Person updatedPerson = new Person(2, "Iseult", "Travers", LocalDate.of(1985, 10, 19), "9 rue Buffon", "78000",
+		Person expectedPerson = new Person(1, "Iseult", "Travers", LocalDate.of(1985, 10, 19), "9 rue Buffon", "78000",
 				"Versailles", "+331795282491");
-		memoryDao.updatePerson(updatedPerson);
-
-		assertTrue(Optional.of(updatedPerson).isPresent());
+		Optional<Person> actualPerson = memoryDao.updatePerson(expectedPerson);
+		Assertions.assertThat(actualPerson.get()).usingRecursiveComparison().isEqualTo(expectedPerson);
 	}
 
 	@Test
