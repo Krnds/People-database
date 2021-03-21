@@ -2,7 +2,6 @@ package com.karinedias;
 
 import java.time.LocalDate;
 
-import com.karinedias.dao.DatabaseType;
 import com.karinedias.dao.MemoryDao;
 import com.karinedias.model.Person;
 import com.karinedias.presentation.CommandLineInterface;
