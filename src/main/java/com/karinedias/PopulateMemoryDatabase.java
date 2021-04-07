@@ -4,19 +4,11 @@ import java.time.LocalDate;
 
 import com.karinedias.dao.MemoryDao;
 import com.karinedias.model.Person;
-import com.karinedias.presentation.CommandLineInterface;
 import com.karinedias.service.PersonService;
 
-public class Main {
+public class PopulateMemoryDatabase {
 	
-	/**
-	 * Class for initializing Command Line Interface Application
-	 * @param args
-	 */
-
 	public static void main(String[] args) {
-
-		// Put some people into local database
 		MemoryDao memoryDao = new MemoryDao();
 		PersonService personService = new PersonService(memoryDao);
 		personService.create(new Person(1, "Florence", "Cornebuse", LocalDate.of(1963, 12, 03), "21 rue Parchemin",
@@ -39,9 +31,6 @@ public class Main {
 				"17 rue de la Cheminée Blanche", "91710", "Vert-le-Petit", "0123259988"));
 		personService.create(new Person(10, "Thérèse", "Porchet", LocalDate.of(1947, 8, 30), "15 rue Virgile", "67200",
 				"Strasbourg", "0386156377"));
-
-		CommandLineInterface.main(args);
-
 	}
 
 }
