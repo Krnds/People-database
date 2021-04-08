@@ -62,7 +62,8 @@
 		</fieldset>
 		<input type="hidden" value=<%=request.getParameter("id")%> name="id">
 	</form>
-
-	<a href="database"> Back to the database</a>
+	<div class="backtodatabase-button">
+			<a class="backtodatabase" href="database"> Back to the database</a>
+	</div>
 </body>
 </html>

@@ -39,8 +39,13 @@
 					<td>${currentPerson.postalCode}</td>
 					<td>${currentPerson.city}</td>
 					<td>${currentPerson.phoneNumber}</td>
-					<td class="icons"><a href="getPerson.jsp"> <i
-							style="color: #757373" class="far fa-eye"></i></a>
+					<td class="icons">
+						<form class="submit-button" name="get" method="post"
+							action="get?id=${currentPerson.id}">
+							<button class="test" type="submit">
+								<i style="color: #757373" class="far fa-eye"> </i>
+							</button>
+						</form>
 
 						<form class="submit-button" name="update" method="post"
 							action="updatePerson.jsp?id=${currentPerson.id}">
@@ -54,14 +59,16 @@
 							<button class="test" type="submit">
 								<i style="color: #993333" class="fas fa-trash"> </i>
 							</button>
-						</form></td>
+						</form>
+					</td>
 				</tr>
-				
+
 				<form method="post" action="updatePerson.jsp">
-   <input type="hidden" name="firstname" value="${currentPerson.firstname}" />
-   <input type="hidden" name="var1" value="val1" />
-</form>
-				
+					<input type="hidden" name="firstname"
+						value="${currentPerson.firstname}" /> <input type="hidden"
+						name="var1" value="val1" />
+				</form>
+
 			</c:forEach>
 
 		</tbody>

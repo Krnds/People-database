@@ -54,7 +54,9 @@
 		</table>
 	</fieldset>
 </form>
-<a href="database"> Back to the database</a>
+	<div class="backtodatabase-button">
+			<a class="backtodatabase" href="database"> Back to the database</a>
+	</div>
 
 <body>
 </body>

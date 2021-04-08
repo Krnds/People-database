@@ -2,12 +2,10 @@
 	font-family: sans-serif; /* for all elements */
 }
 
-/* *:focus {
-	border: none;
-	outline: none !important;
-} */
-.tbl {
-	margin: 2.6em 0em 0em 2em;
+h2 {
+	font-family: sans-serif;
+	text-transform: uppercase;
+	font-weight: 400;
 }
 
 tr:hover {
@@ -19,11 +17,25 @@ tr:hover {
 	text-transform: uppercase;
 }
 
+.getPerson-table td:first-child {
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
 .icons td {
 	width: auto;
 }
 
 .persons-table td {
+	font-family: sans-serif;
+	border-collapse: collapse;
+	font-weight: lighter;
+	border: 1px solid black;
+	text-align: center;
+	padding: 10px;
+}
+
+.getPerson-table td, tr {
 	font-family: sans-serif;
 	border-collapse: collapse;
 	font-weight: lighter;
@@ -86,19 +98,13 @@ form {
 	display: inline;
 }
 
-/* button {
-	background: none;
-	padding: 0px;
-	border: none;
-	cursor: pointer;
-} */
 
 /* see all details button */
 .addPerson-button {
 	padding: 30px 2px;
 }
 
-a.addNewPerson{
+a.addNewPerson {
 	color: #494949 !important;
 	text-transform: capitalize;
 	text-decoration: none;
@@ -113,5 +119,28 @@ a.addNewPerson:hover {
 	color: #ffffff !important;
 	background: #138d75;
 	border-color: #138d75 !important;
+	transition: all 0.4s ease 0s;
+}
+
+/* back to database button */
+.backtodatabase-button {
+	padding: 30px 2px;
+}
+
+a.backtodatabase {
+	color: #494949 !important;
+	text-transform: capitalize;
+	text-decoration: none;
+	background: #ffffff;
+	padding: 10px;
+	border: 1px solid #494949 !important;
+	display: inline-block;
+	transition: all 0.4s ease 0s;
+}
+
+a.backtodatabase:hover {
+	color: #ffffff !important;
+	background: #cd6f5c;
+	border-color: #cd6f5c !important;
 	transition: all 0.4s ease 0s;
 }

@@ -7,8 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="style.css">
-<link href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
-	rel="stylesheet">
 <title>People database project</title>
 </head>
 
