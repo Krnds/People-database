@@ -11,7 +11,7 @@
 <title>People database project</title>
 </head>
 <h2>Add new person</h2>
-<form action="add" method="post">
+<form action="add" method="post" autocomplete="off">
 	<fieldset>
 		<table>
 			<tr>

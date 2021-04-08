@@ -30,7 +30,6 @@
 	</div>
 
 	<div>
-		<%-- <%= choice.setDao(setDao(dao))%> --%>
 	</div>
 
 

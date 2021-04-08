@@ -18,23 +18,18 @@ public class ChooseDAO extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static Dao dao;
-	
+
 	public static Dao getDao() {
-		System.out.println("Calling ChooseDao.getDao()");
 		return dao;
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		String choice = request.getParameter("daoChoice");
-		System.out.println(choice.toString());
 		chooseStrategy(choice);
-
 		response.setCharacterEncoding("UTF-8");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("database");
 		dispatcher.forward(request, response);
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -43,12 +38,10 @@ public class ChooseDAO extends HttpServlet {
 	}
 
 	public Dao chooseStrategy(String dao) {
-
 		switch (dao) {
 		case "JDBC":
 			ChooseDAO.dao = new DaoJDBC(DatabaseType.POSTGRESQL);
 			return ChooseDAO.dao;
-
 		case "Memory":
 			ChooseDAO.dao = new MemoryDao();
 			return ChooseDAO.dao;
