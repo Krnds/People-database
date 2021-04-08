@@ -1,9 +1,12 @@
 # People Database
 
 ## About
+
 People database is a Java/Jakarta EE project made without Spring to explore JSP/Servlets, the connection between JDBC and a database, and setting up a Tomcat server.
 
 The database can be accessed in CLI form or in a web application.
+
+![Overview](/img/snapshot_database.png)
 
 ## Usage
 
