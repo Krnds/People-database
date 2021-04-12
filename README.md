@@ -12,6 +12,17 @@ The database can be accessed in CLI form or in a web application.
 
 ## Usage
 
+1. Install HTTP server Apache Tomcat 9+ [here](https://tomcat.apache.org/download-90.cgi)
+
+2. Set up environnement variables for ```JAVA_HOME``` and ```CATALINA_HOME```
+
+3. Make all Shell scripts in tomcat/bin executables whith ```chmod``` and execute ```startup.sh``` script.
+
+4. Open http://localhost:8080/ in your browser to check if Tomcat is running
+
+5. Drag and drop the people-db.war package in your tomcat/webapps and wait until you see this project folder created.
+
+6. Run http://localhost:8080/people-db/ and that's it!
 
 
 ## TODO:
