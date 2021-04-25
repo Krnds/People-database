@@ -7,10 +7,7 @@ People database is a Java/Jakarta EE project made without Spring to explore JSP/
 The database can be accessed in CLI form or in a web application.
 
 ![Overview](/img/snapshot_database.png)
-
-![Overview](/img/snapshot_database_2.png)
-
-![example-video](/img/people-database.mp4)
+<img src="/img/snapshot_database_2.png" alt="overview" width="250"/>
 
 ## Usage
 
@@ -33,9 +30,9 @@ The database can be accessed in CLI form or in a web application.
 
 - [ ] Find a way to get values from the database entry and display them in the placeholders of updatePerson.jsp
 
-- [ ] Learn JQuery to :
+- [X] Learn JQuery to :
 
-    - [ ] Sort database main table by columns
+    - [X] Sort database main table by columns
     - [ ] Prevent entry from deleting when trash button is called
 
 - [X] Update CSS
