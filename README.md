@@ -10,6 +10,8 @@ The database can be accessed in CLI form or in a web application.
 
 ![Overview](/img/snapshot_database_2.png)
 
+![example-video](/img/people-database.mp4)
+
 ## Usage
 
 1. Install HTTP server Apache Tomcat 9+ [here](https://tomcat.apache.org/download-90.cgi)
