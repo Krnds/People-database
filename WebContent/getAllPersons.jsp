@@ -8,11 +8,19 @@
 <link rel="stylesheet" href="style.css">
 <link href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
 	rel="stylesheet">
+	
+	  <link href="https://doc.cantieriprotetti.it/js/tablesorter/css/theme.default.min.css" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.5/js/jquery.tablesorter.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.5/js/jquery.tablesorter.widgets.min.js"></script>
+	
+	
 <title>People database project</title>
 </head>
 <h2>Current Database</h2>
 <body>
-	<table class="persons-table">
+	<table id="myTable" class="tablesorter">
 
 		<thead>
 			<tr>
@@ -75,6 +83,20 @@
 
 	</table>
 
+
+  <script>
+
+    $(document).ready(function () {
+      $("#myTable").tablesorter({
+        sortList: [[$("#myTable").colCount() - 1, 0]],
+        theme: "default",
+      });
+    });
+    
+    $("#myTable").tablesorter({
+        headers: {8: {sorter: false}}
+    });
+  </script>
 
 
 	<div class="addPerson-button">

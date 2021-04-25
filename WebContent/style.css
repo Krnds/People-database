@@ -12,27 +12,49 @@ tr:hover {
 	cursor: default;
 }
 
-.persons-table thead tr:first-child {
+.myTable thead tr:first-child {
 	font-weight: 600;
 	text-transform: uppercase;
+	width: 50px;
 }
 
 .getPerson-table td:first-child {
 	font-weight: 600;
 	text-transform: uppercase;
+	width: 50px;
 }
 
 .icons td {
 	width: auto;
 }
 
-.persons-table td {
+.myTable td {
 	font-family: sans-serif;
 	border-collapse: collapse;
 	font-weight: lighter;
 	border: 1px solid black;
 	text-align: center;
 	padding: 10px;
+}
+
+#myTable.tablesorter-default {
+	font: 15px/20px Arial, Sans-serif;
+}
+
+.tablesorter-default .header, .tablesorter-default .tablesorter-header {
+	text-transform: uppercase;
+}
+
+#myTable tr.tablesorter-headerRow {
+	text-transform: uppercase;
+}
+
+#myTable.tablesorter-header {
+	text-transform: uppercase;
+}
+
+#myTable.tablesorter thead tr:first-child {
+	text-transform: uppercase;
 }
 
 .getPerson-table td, tr {
@@ -56,19 +78,6 @@ a {
 	text-decoration: none;
 }
 
-/* Remove all borders and style to HTML buttons */
-/* form {
-	padding: 0px;
-	border: none;
-	background: none;
-} */
-
-/* Change styling of "submit" button */
-/* input[type=submit] {
-	background: none;
-	border: none;
-	padding: 0px;
-} */
 button.test {
 	border-top-width: 0px;
 	border-top-style: solid;
@@ -97,7 +106,6 @@ form.submit-button {
 form {
 	display: inline;
 }
-
 
 /* see all details button */
 .addPerson-button {
